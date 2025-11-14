@@ -248,6 +248,119 @@ def doctor(verbose: bool):
 
 
 @main.command()
+@click.argument("query", required=True)
+@click.option(
+    "--dry-run",
+    is_flag=True,
+    help="Simulate execution without actually running the skill",
+)
+@click.option(
+    "--skills-dir",
+    default=None,
+    type=click.Path(exists=True, file_okay=False, path_type=Path),
+    help="Custom skills directory (default: auto-detect)",
+)
+@click.option(
+    "--learning-path",
+    default=None,
+    type=click.Path(path_type=Path),
+    help="Custom learning data path (default: ~/.superclaude/learning.json)",
+)
+@click.option(
+    "--no-safety",
+    is_flag=True,
+    help="Skip safety validation (dangerous!)",
+)
+def query(query: str, dry_run: bool, skills_dir: Path, learning_path: Path, no_safety: bool):
+    """
+    Execute or suggest skills based on natural language query
+
+    Uses Phase C auto-execution system to intelligently match your query
+    to available skills and either execute them (if confidence ≥85% and safe)
+    or return suggestions.
+
+    Examples:
+        superclaude query "troubleshoot login error"
+        superclaude query "implement user authentication" --dry-run
+        superclaude query "cleanup old files" --skills-dir ./custom-skills
+    """
+    from superclaude.execution import ExecutionRouter
+    from superclaude.intent import SkillMatcher
+    from superclaude.intent.analyzer import ContextAnalyzer
+
+    # Setup skills directory
+    if skills_dir is None:
+        # Auto-detect: try ./skills, ~/.claude/skills, package skills
+        candidates = [
+            Path.cwd() / "skills",
+            Path.home() / ".claude" / "skills",
+            Path(__file__).parent.parent.parent / "skills",
+        ]
+        for candidate in candidates:
+            if candidate.exists():
+                skills_dir = candidate
+                break
+
+        if skills_dir is None:
+            click.echo("❌ No skills directory found. Install skills first:", err=True)
+            click.echo("   superclaude install-skill <skill-name>", err=True)
+            sys.exit(1)
+
+    # Setup matcher and router
+    try:
+        matcher = SkillMatcher(skills_dir)
+        router = ExecutionRouter(matcher, learning_path=learning_path)
+
+        # Analyze project context
+        analyzer = ContextAnalyzer()
+        context = analyzer.analyze()
+
+        # Execute or suggest
+        click.echo(f"🔍 Processing query: \"{query}\"")
+        click.echo()
+
+        result = router.execute_or_suggest(
+            query=query,
+            context=context,
+            dry_run=dry_run
+        )
+
+        # Display result
+        click.echo(f"⏱️  Execution time: {result.execution_time_ms:.2f}ms")
+        click.echo()
+
+        if result.warning:
+            click.echo(f"⚠️  {result.warning}", err=True)
+            click.echo()
+
+        if result.executed:
+            click.echo(f"✅ Auto-executed: {result.skill_used}")
+            if result.arguments_used:
+                args_str = " ".join(f"--{k} {v}" for k, v in result.arguments_used.items())
+                click.echo(f"   Arguments: {args_str}")
+            click.echo()
+            click.echo(result.output)
+        else:
+            click.echo("💡 Suggestions:")
+            click.echo()
+            click.echo(result.suggestions)
+
+        # Show learning stats
+        stats = router.get_learning_stats()
+        if stats["total_executions"] > 0:
+            click.echo()
+            click.echo(f"📊 Learning: {stats['total_executions']} executions, "
+                      f"{stats['total_skills_tracked']} skills tracked")
+
+    except Exception as e:
+        click.echo(f"❌ Error: {e}", err=True)
+        if "--verbose" in sys.argv:
+            import traceback
+            traceback.print_exc()
+        sys.exit(1)
+
+
+@main.command()
 def version():
     """Show SuperClaude version"""
     click.echo(f"SuperClaude version {__version__}")

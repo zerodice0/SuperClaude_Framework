@@ -1,6 +1,40 @@
 ---
-name: Confidence Check
-description: Pre-implementation confidence assessment (≥90% required). Use before starting any implementation to verify readiness with duplicate check, architecture compliance, official docs verification, OSS references, and root cause identification.
+name: confidence-check
+display_name: "Confidence Check"
+description: "Pre-implementation confidence assessment (≥90% required). Use before starting any implementation to verify readiness with duplicate check, architecture compliance, official docs verification, OSS references, and root cause identification."
+version: 1.0.0
+category: special
+complexity: enhanced
+
+# Intent Detection
+intents:
+  primary: ["confidence check", "check confidence", "verify readiness", "assess {implementation}"]
+  keywords: [confidence, check, verify, assess, readiness, duplicate, architecture, documentation, oss, root-cause]
+  patterns: ["^(confidence|readiness|verify|assess)( check| assessment)?$"]
+  contexts: [pre_implementation, verification, assessment]
+
+# Arguments
+arguments:
+  - name: task
+    type: string
+    required: false
+    description: "Task to assess confidence for"
+    infer_from: user_query
+
+# Auto-Execution
+auto_trigger:
+  enabled: true
+  confidence_threshold: 0.85
+  confirm_before_execution: false
+  safety_checks: []
+
+# Dependencies
+mcp_servers: [context7, tavily]
+personas: [architect, analyzer]
+requires_skills: []
+optional_skills: []
+author: "SuperClaude Framework"
+tags: [confidence, assessment, pre-implementation, verification]
 ---
 
 # Confidence Check Skill

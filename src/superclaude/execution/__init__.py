@@ -1,12 +1,20 @@
 """
 SuperClaude Execution Engine
 
-Integrates three execution engines:
+Integrates execution systems:
+
+Legacy Engines (v4.x):
 1. Reflection Engine: Think × 3 before execution
 2. Parallel Engine: Execute at maximum speed
 3. Self-Correction Engine: Learn from mistakes
 
+Phase C Auto-Execution (v4.1.8+):
+4. Execution Router: Auto-execute high-confidence matches
+5. Safety Validator: Pre-execution safety checks
+6. Learning System: Usage pattern learning
+
 Usage:
+    # Legacy execution
     from superclaude.execution import intelligent_execute
 
     result = intelligent_execute(
@@ -14,16 +22,38 @@ Usage:
         context={"project_index": "...", "git_status": "..."},
         operations=[op1, op2, op3]
     )
+
+    # Phase C auto-execution
+    from superclaude.execution import ExecutionRouter
+    from superclaude.intent import SkillMatcher
+
+    matcher = SkillMatcher()
+    router = ExecutionRouter(matcher)
+    result = router.execute_or_suggest("troubleshoot the login bug")
 """
 
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional
 
+# Legacy execution engines
 from .parallel import ExecutionPlan, ParallelExecutor, Task, should_parallelize
 from .reflection import ConfidenceScore, ReflectionEngine, reflect_before_execution
 from .self_correction import RootCause, SelfCorrectionEngine, learn_from_failure
 
+# Phase C auto-execution system
+from .learner import LearningSystem
+from .models import (
+    ExecutionResult,
+    LearningData,
+    SafetyCheck,
+    SafetyResult,
+    SessionData,
+)
+from .router import ExecutionRouter
+from .validator import SafetyValidator
+
 __all__ = [
+    # Legacy execution
     "intelligent_execute",
     "ReflectionEngine",
     "ParallelExecutor",
@@ -35,6 +65,15 @@ __all__ = [
     "should_parallelize",
     "reflect_before_execution",
     "learn_from_failure",
+    # Phase C auto-execution
+    "ExecutionRouter",
+    "SafetyValidator",
+    "LearningSystem",
+    "ExecutionResult",
+    "SafetyResult",
+    "SafetyCheck",
+    "LearningData",
+    "SessionData",
 ]
 
 
