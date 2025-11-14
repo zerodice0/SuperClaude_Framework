@@ -61,6 +61,7 @@ def tokenize_korean(text: str) -> List[str]:
     - Split on whitespace and punctuation
     - Keep Korean syllables (Hangul) together as words
     - Extract Latin alphanumeric sequences
+    - Remove common Korean particles (조사)
 
     Args:
         text: Korean text to tokenize
@@ -75,7 +76,23 @@ def tokenize_korean(text: str) -> List[str]:
     # Pattern: Consecutive Hangul syllables OR consecutive alphanumeric
     tokens = re.findall(r'[\uac00-\ud7a3]+|[a-z0-9]+', text.lower())
 
-    return tokens
+    # Remove common Korean particles (조사)
+    # Common particles: 을/를, 이/가, 은/는, 와/과, 에, 에서, 에게, 으로, 로, 의
+    particles = ['을', '를', '이', '가', '은', '는', '와', '과', '에', '에서', '에게', '으로', '로', '의']
+
+    cleaned_tokens = []
+    for token in tokens:
+        # Try removing particles from end of token
+        cleaned = token
+        for particle in particles:
+            if cleaned.endswith(particle) and len(cleaned) > len(particle):
+                cleaned = cleaned[:-len(particle)]
+                break
+
+        if cleaned:  # Only add non-empty tokens
+            cleaned_tokens.append(cleaned)
+
+    return cleaned_tokens
 
 
 def tokenize_japanese(text: str) -> List[str]:

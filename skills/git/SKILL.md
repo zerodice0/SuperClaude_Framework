@@ -12,10 +12,14 @@ intents:
   keywords: [
     # English
     git, commit, push, pull, branch, merge, status, diff, log, checkout, clone, fetch, rebase, stash,
-    # 한국어 (Korean)
+    # 한국어 (Korean) - 기본 키워드
     깃, 커밋, 푸시, 풀, 브랜치, 병합, 상태, 차이, 로그, 체크아웃, 클론, 페치, 리베이스, 스태시,
-    # 日本語 (Japanese)
-    ギット, コミット, プッシュ, プル, ブランチ, マージ, ステータス, 差分, ログ, チェックアウト, クローン, フェッチ, リベース, スタッシュ
+    # 한국어 (Korean) - 자연어 표현
+    커밋하다, 커밋해, 커밋해주세요, 푸시하다, 푸시해, 푸시해주세요, 저장, 올려, 올려주세요, 반영,
+    # 日本語 (Japanese) - 基本キーワード
+    ギット, コミット, プッシュ, プル, ブランチ, マージ, ステータス, 差分, ログ, チェックアウト, クローン, フェッチ, リベース, スタッシュ,
+    # 日本語 (Japanese) - 自然な表現
+    コミットする, コミットして, プッシュする, プッシュして, 保存, アップロード, 反映
   ]
   patterns: ["^git (status|commit|push|pull|branch|merge|diff|log|checkout|clone|fetch|rebase|stash).*$", "^(commit|push|pull) (?P<target>.+)$"]
   contexts: [version_control, repository, workflow, commit_message]

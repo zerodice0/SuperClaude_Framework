@@ -12,10 +12,14 @@ intents:
   keywords: [
     # English
     implement, create, build, develop, add, code, feature, component, api, service,
-    # 한국어 (Korean)
+    # 한국어 (Korean) - 기본 키워드
     구현, 생성, 빌드, 개발, 추가, 코드, 기능, 컴포넌트, API, 서비스,
-    # 日本語 (Japanese)
-    実装, 作成, ビルド, 開発, 追加, コード, 機能, コンポーネント, API, サービス
+    # 한국어 (Korean) - 자연어 표현
+    만들다, 만들기, 만들고싶다, 만들고싶어, 만들어, 만들어주세요, 작성, 제작,
+    # 日本語 (Japanese) - 基本キーワード
+    実装, 作成, ビルド, 開発, 追加, コード, 機能, コンポーネント, API, サービス,
+    # 日本語 (Japanese) - 自然な表現
+    作る, 作りたい, 作って
   ]
   patterns: ["^(implement|create|build|develop) (a |an )?(?P<feature>.+)$", "^add (?P<feature>.+) (feature|functionality|component)$", "^(?P<feature>.+) (implementation|development)$"]
   contexts: [feature_development, component_creation, api_implementation, code_generation]

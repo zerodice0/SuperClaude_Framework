@@ -12,10 +12,14 @@ intents:
   keywords: [
     # English
     test, tests, testing, coverage, quality, qa, validate, verify, unit, integration, e2e, spec, runner, jest, vitest, mocha,
-    # 한국어 (Korean)
+    # 한국어 (Korean) - 기본 키워드
     테스트, 커버리지, 품질, QA, 검증, 확인, 유닛, 통합, E2E, 스펙, 러너,
-    # 日本語 (Japanese)
-    テスト, カバレッジ, 品質, QA, 検証, 確認, ユニット, 統合, E2E, スペック, ランナー
+    # 한국어 (Korean) - 자연어 표현
+    테스트하다, 테스트해, 테스트해주세요, 실행, 실행하다, 실행해, 돌려, 돌려주세요, 검사, 확인해,
+    # 日本語 (Japanese) - 基本キーワード
+    テスト, カバレッジ, 品質, QA, 検証, 確認, ユニット, 統合, E2E, スペック, ランナー,
+    # 日本語 (Japanese) - 自然な表現
+    テストする, テストして, 実行する, 実行して, 検査する, 確認して
   ]
   patterns: ["^(test|run tests|execute tests)( (?P<target>.+))?$", "^(run|execute) (unit|integration|e2e|all) tests?$"]
   contexts: [testing, quality_assurance, validation, coverage]

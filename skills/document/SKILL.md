@@ -12,10 +12,14 @@ intents:
   keywords: [
     # English
     document, documentation, docs, comments, docstring, jsdoc, readme, guide, reference, manual, api-docs,
-    # 한국어 (Korean)
+    # 한국어 (Korean) - 기본 키워드
     문서, 문서화, 주석, 독스트링, JSDoc, README, 가이드, 참조, 매뉴얼, API문서,
-    # 日本語 (Japanese)
-    ドキュメント, ドキュメンテーション, コメント, ドックストリング, JSDoc, README, ガイド, 参照, マニュアル, APIドキュメント
+    # 한국어 (Korean) - 자연어 표현
+    문서화하다, 문서화해, 문서화해주세요, 주석, 설명, 작성, 써, 써주세요, 달아, 달아주세요,
+    # 日本語 (Japanese) - 基本キーワード
+    ドキュメント, ドキュメンテーション, コメント, ドックストリング, JSDoc, README, ガイド, 参照, マニュアル, APIドキュメント,
+    # 日本語 (Japanese) - 自然な表現
+    ドキュメント化する, ドキュメント化して, コメント, 説明, 書いて, 書く
   ]
   patterns: ["^(document|doc) (?P<target>.+)$", "^(create|generate|write|add) (docs|documentation) (for )?(?P<target>.+)$"]
   contexts: [documentation, comments, api_docs, guides]

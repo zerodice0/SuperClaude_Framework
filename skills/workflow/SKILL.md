@@ -12,10 +12,14 @@ intents:
   keywords: [
     # English
     workflow, generate, plan, implementation, prd, feature, specification, orchestration, systematic,
-    # 한국어 (Korean)
+    # 한국어 (Korean) - 기본 키워드
     워크플로우, 생성, 계획, 구현, PRD, 기능, 명세, 오케스트레이션, 체계적,
-    # 日本語 (Japanese)
-    ワークフロー, 生成, 計画, 実装, PRD, 機能, 仕様, オーケストレーション, 体系的
+    # 한국어 (Korean) - 자연어 표현
+    워크플로우, 계획하다, 계획해, 계획해주세요, 단계, 절차, 순서, 흐름, 과정,
+    # 日本語 (Japanese) - 基本キーワード
+    ワークフロー, 生成, 計画, 実装, PRD, 機能, 仕様, オーケストレーション, 体系的,
+    # 日本語 (Japanese) - 自然な表現
+    ワークフロー, 計画する, 計画して, 手順, 順序, 流れ, プロセス
   ]
   patterns: ["^(workflow|generate workflow|plan) (?P<target>.+)$", "^create (implementation|execution) (plan|workflow) (for |from )?(?P<target>.+)$", "^(?P<target>.+\\.md) (workflow|implementation)$"]
   contexts: [prd_analysis, workflow_generation, implementation_planning, multi_domain_coordination]

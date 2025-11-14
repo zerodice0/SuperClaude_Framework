@@ -12,10 +12,14 @@ intents:
   keywords: [
     # English
     analyze, assess, review, audit, quality, security, performance, architecture,
-    # 한국어 (Korean)
+    # 한국어 (Korean) - 기본 키워드
     분석, 평가, 검토, 감사, 품질, 보안, 성능, 아키텍처,
-    # 日本語 (Japanese)
-    分析, 評価, レビュー, 監査, 品質, セキュリティ, パフォーマンス, アーキテクチャ
+    # 한국어 (Korean) - 자연어 표현
+    분석하다, 분석해, 분석해주세요, 검토하다, 검토해, 검토해주세요, 확인하다, 확인해,
+    # 日本語 (Japanese) - 基本キーワード
+    分析, 評価, レビュー, 監査, 品質, セキュリティ, パフォーマンス, アーキテクチャ,
+    # 日本語 (Japanese) - 自然な表現
+    分析する, 分析して, 確認する, 確認して, チェック
   ]
   patterns: ["^(analyze|assess|review|audit) (?P<target>.+)?$", "^code (analysis|assessment|review)( of)?( (?P<target>.+))?$"]
   contexts: [code_analysis, quality_assessment, security_audit, performance_review]

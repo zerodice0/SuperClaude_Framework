@@ -12,10 +12,14 @@ intents:
   keywords: [
     # English
     design, architecture, api, interface, component, database, schema, system, specification, blueprint, structure,
-    # 한국어 (Korean)
+    # 한국어 (Korean) - 기본 키워드
     디자인, 설계, 아키텍처, API, 인터페이스, 컴포넌트, 데이터베이스, 스키마, 시스템, 명세, 청사진, 구조,
-    # 日本語 (Japanese)
-    デザイン, 設計, アーキテクチャ, API, インターフェース, コンポーネント, データベース, スキーマ, システム, 仕様, 設計図, 構造
+    # 한국어 (Korean) - 자연어 표현
+    디자인하다, 디자인해, 디자인해주세요, 설계하다, 설계해, 설계해주세요, 그려, 그려주세요, 구성, 구성해,
+    # 日本語 (Japanese) - 基本キーワード
+    デザイン, 設計, アーキテクチャ, API, インターフェース, コンポーネント, データベース, スキーマ, システム, 仕様, 設計図, 構造,
+    # 日本語 (Japanese) - 自然な表現
+    デザインする, デザインして, 設計する, 設計して, 描く, 描いて
   ]
   patterns: ["^(design|architect|plan|specify) (?P<target>.+)$", "^create (design|architecture|spec) for (?P<target>.+)$"]
   contexts: [design, architecture, planning, specification]

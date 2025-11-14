@@ -12,10 +12,14 @@ intents:
   keywords: [
     # English
     troubleshoot, fix, debug, resolve, diagnose, error, bug, issue, problem, failure,
-    # 한국어 (Korean)
+    # 한국어 (Korean) - 기본 키워드
     문제해결, 수정, 디버그, 해결, 진단, 오류, 버그, 문제, 실패,
-    # 日本語 (Japanese)
-    トラブルシュート, 修正, デバッグ, 解決, 診断, エラー, バグ, 問題, 失敗
+    # 한국어 (Korean) - 자연어 표현
+    고치다, 고쳐, 고쳐주세요, 해결하다, 해결해, 해결해주세요, 안되다, 안돼, 작동안함,
+    # 日本語 (Japanese) - 基本キーワード
+    トラブルシュート, 修正, デバッグ, 解決, 診断, エラー, バグ, 問題, 失敗,
+    # 日本語 (Japanese) - 自然な表現
+    直す, 直して, 直したい, 動かない, 動きません
   ]
   patterns: ["^(troubleshoot|fix|debug|resolve|diagnose) (?P<issue>.+)$", "^(?P<issue>.+) (not working|broken|failing|error)$", "^why (is|does) (?P<issue>.+)$"]
   contexts: [debugging, error_resolution, bug_fixing, issue_diagnosis]

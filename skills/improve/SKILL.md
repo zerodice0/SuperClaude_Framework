@@ -12,10 +12,14 @@ intents:
   keywords: [
     # English
     improve, optimize, refactor, enhance, quality, performance, maintainability, cleanup,
-    # 한국어 (Korean)
+    # 한국어 (Korean) - 기본 키워드
     개선, 최적화, 리팩토링, 향상, 품질, 성능, 유지보수성, 정리,
-    # 日本語 (Japanese)
-    改善, 最適化, リファクタリング, 強化, 品質, パフォーマンス, 保守性, クリーンアップ
+    # 한국어 (Korean) - 자연어 표현
+    개선하다, 개선해, 개선해주세요, 좋게, 더좋게, 빠르게, 깔끔하게, 정리해, 정리해주세요,
+    # 日本語 (Japanese) - 基本キーワード
+    改善, 最適化, リファクタリング, 強化, 品質, パフォーマンス, 保守性, クリーンアップ,
+    # 日本語 (Japanese) - 自然な表現
+    改善する, 改善して, 良くする, 良くして, 速くする, 速くして, 綺麗にする
   ]
   patterns: ["^(improve|optimize|refactor|enhance) (?P<target>.+)$", "^make (?P<target>.+) (better|faster|cleaner)$"]
   contexts: [code_improvement, performance_optimization, refactoring, quality_enhancement]
