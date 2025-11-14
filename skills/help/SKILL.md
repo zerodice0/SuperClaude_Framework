@@ -86,6 +86,7 @@ Here is a complete list of all available SuperClaude (`/sc`) commands.
 | `/sc:spec-panel` | Multi-expert specification review and improvement using renowned specification and software engineering experts |
 | `/sc:task` | Execute complex tasks with intelligent workflow management and delegation |
 | `/sc:test` | Execute tests with coverage analysis and automated quality reporting |
+| `/sc:translate` | Translate non-English queries and suggest matching skills for Korean/Japanese slang and synonyms |
 | `/sc:troubleshoot` | Diagnose and resolve issues in code, builds, deployments, and system behavior |
 | `/sc:workflow` | Generate structured implementation workflows from PRDs and feature requirements |
 
