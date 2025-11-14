@@ -361,6 +361,98 @@ def query(query: str, dry_run: bool, skills_dir: Path, learning_path: Path, no_s
 
 
 @main.command()
+@click.argument("query", required=True)
+@click.option(
+    "--skills-dir",
+    default=None,
+    type=click.Path(exists=True, file_okay=False, path_type=Path),
+    help="Custom skills directory (default: auto-detect)",
+)
+def translate(query: str, skills_dir: Path):
+    """
+    Translate non-English queries and suggest matching skills
+
+    Uses Claude Code's internal translation to convert Korean/Japanese queries
+    to English for better skill matching. Handles slang and synonyms that
+    are not in the keyword lists.
+
+    Examples:
+        superclaude translate "로그인 페이지 좀 짜줘"
+        superclaude translate "API 코딩해"
+        superclaude translate "バグ直して"
+    """
+    from superclaude.intent.translator import get_translation_suggestion, translate_query
+    from superclaude.intent.tokenizer import detect_language
+    from superclaude.intent import SkillMatcher
+
+    # Detect language
+    lang = detect_language(query)
+
+    if lang == 'en':
+        click.echo("ℹ️  Query is already in English. No translation needed.")
+        click.echo()
+        click.echo(f"Original: {query}")
+        return
+
+    # Display language info
+    lang_name = {"ko": "Korean", "ja": "Japanese", "zh": "Chinese"}.get(lang, "Unknown")
+    click.echo(f"🔍 Detected language: {lang_name}")
+    click.echo()
+
+    # Translate query
+    click.echo("🌐 Translating query to English...")
+    translated = translate_query(query, use_mock=True)
+
+    click.echo(f"   Original: {query}")
+    click.echo(f"   Translated: {translated}")
+    click.echo()
+
+    # Setup skills directory
+    if skills_dir is None:
+        # Auto-detect
+        candidates = [
+            Path.cwd() / "skills",
+            Path.home() / ".claude" / "skills",
+            Path(__file__).parent.parent.parent / "skills",
+        ]
+        for candidate in candidates:
+            if candidate.exists():
+                skills_dir = candidate
+                break
+
+    if skills_dir is None:
+        click.echo("⚠️  No skills directory found. Skipping skill matching.")
+        return
+
+    # Match skills with translated query
+    try:
+        matcher = SkillMatcher(skills_dir)
+        result = matcher.match(translated)
+
+        if result.matches:
+            click.echo("🎯 Suggested skills:")
+            click.echo()
+
+            for i, match in enumerate(result.matches[:3], 1):
+                confidence_pct = int(match.confidence * 100)
+                click.echo(f"{i}. /sc:{match.skill.name}")
+                click.echo(f"   Confidence: {confidence_pct}%")
+                click.echo(f"   Description: {match.skill.description}")
+                click.echo()
+
+            # Show command suggestion for top match
+            top_match = result.matches[0]
+            click.echo("💡 Recommended command:")
+            click.echo(f"   /sc:{top_match.skill.name} \"{translated}\"")
+        else:
+            click.echo("❌ No matching skills found for translated query.")
+            click.echo("   Try using different keywords or check available skills.")
+
+    except Exception as e:
+        click.echo(f"⚠️  Error during skill matching: {e}", err=True)
+
+
+@main.command()
 def version():
     """Show SuperClaude version"""
     click.echo(f"SuperClaude version {__version__}")
