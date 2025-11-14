@@ -9,7 +9,14 @@ complexity: enhanced
 # Intent Detection
 intents:
   primary: ["test {target}", "run tests", "execute tests", "test coverage", "run test suite"]
-  keywords: [test, tests, testing, coverage, quality, qa, validate, verify, unit, integration, e2e, spec, runner, jest, vitest, mocha]
+  keywords: [
+    # English
+    test, tests, testing, coverage, quality, qa, validate, verify, unit, integration, e2e, spec, runner, jest, vitest, mocha,
+    # 한국어 (Korean)
+    테스트, 커버리지, 품질, QA, 검증, 확인, 유닛, 통합, E2E, 스펙, 러너,
+    # 日本語 (Japanese)
+    テスト, カバレッジ, 品質, QA, 検証, 確認, ユニット, 統合, E2E, スペック, ランナー
+  ]
   patterns: ["^(test|run tests|execute tests)( (?P<target>.+))?$", "^(run|execute) (unit|integration|e2e|all) tests?$"]
   contexts: [testing, quality_assurance, validation, coverage]
 

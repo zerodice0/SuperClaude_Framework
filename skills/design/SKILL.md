@@ -9,7 +9,14 @@ complexity: basic
 # Intent Detection
 intents:
   primary: ["design {target}", "create design {component}", "architect {system}", "plan {architecture}", "specify {interface}"]
-  keywords: [design, architecture, api, interface, component, database, schema, system, specification, blueprint, structure]
+  keywords: [
+    # English
+    design, architecture, api, interface, component, database, schema, system, specification, blueprint, structure,
+    # 한국어 (Korean)
+    디자인, 설계, 아키텍처, API, 인터페이스, 컴포넌트, 데이터베이스, 스키마, 시스템, 명세, 청사진, 구조,
+    # 日本語 (Japanese)
+    デザイン, 設計, アーキテクチャ, API, インターフェース, コンポーネント, データベース, スキーマ, システム, 仕様, 設計図, 構造
+  ]
   patterns: ["^(design|architect|plan|specify) (?P<target>.+)$", "^create (design|architecture|spec) for (?P<target>.+)$"]
   contexts: [design, architecture, planning, specification]
 

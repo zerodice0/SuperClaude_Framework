@@ -9,7 +9,14 @@ complexity: basic
 # Intent Detection
 intents:
   primary: ["git {operation}", "commit {changes}", "push {branch}", "pull {updates}", "{operation} git"]
-  keywords: [git, commit, push, pull, branch, merge, status, diff, log, checkout, clone, fetch, rebase, stash]
+  keywords: [
+    # English
+    git, commit, push, pull, branch, merge, status, diff, log, checkout, clone, fetch, rebase, stash,
+    # 한국어 (Korean)
+    깃, 커밋, 푸시, 풀, 브랜치, 병합, 상태, 차이, 로그, 체크아웃, 클론, 페치, 리베이스, 스태시,
+    # 日本語 (Japanese)
+    ギット, コミット, プッシュ, プル, ブランチ, マージ, ステータス, 差分, ログ, チェックアウト, クローン, フェッチ, リベース, スタッシュ
+  ]
   patterns: ["^git (status|commit|push|pull|branch|merge|diff|log|checkout|clone|fetch|rebase|stash).*$", "^(commit|push|pull) (?P<target>.+)$"]
   contexts: [version_control, repository, workflow, commit_message]
 

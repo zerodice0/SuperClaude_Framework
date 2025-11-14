@@ -9,7 +9,14 @@ complexity: standard
 # Intent Detection
 intents:
   primary: ["improve {target}", "optimize {code}", "refactor {module}", "enhance {quality}"]
-  keywords: [improve, optimize, refactor, enhance, quality, performance, maintainability, cleanup]
+  keywords: [
+    # English
+    improve, optimize, refactor, enhance, quality, performance, maintainability, cleanup,
+    # 한국어 (Korean)
+    개선, 최적화, 리팩토링, 향상, 품질, 성능, 유지보수성, 정리,
+    # 日本語 (Japanese)
+    改善, 最適化, リファクタリング, 強化, 品質, パフォーマンス, 保守性, クリーンアップ
+  ]
   patterns: ["^(improve|optimize|refactor|enhance) (?P<target>.+)$", "^make (?P<target>.+) (better|faster|cleaner)$"]
   contexts: [code_improvement, performance_optimization, refactoring, quality_enhancement]
 

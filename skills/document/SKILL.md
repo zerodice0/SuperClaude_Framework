@@ -9,7 +9,14 @@ complexity: basic
 # Intent Detection
 intents:
   primary: ["document {target}", "create docs {component}", "generate documentation {feature}", "write docs {api}", "add documentation {code}"]
-  keywords: [document, documentation, docs, comments, docstring, jsdoc, readme, guide, reference, manual, api-docs]
+  keywords: [
+    # English
+    document, documentation, docs, comments, docstring, jsdoc, readme, guide, reference, manual, api-docs,
+    # 한국어 (Korean)
+    문서, 문서화, 주석, 독스트링, JSDoc, README, 가이드, 참조, 매뉴얼, API문서,
+    # 日本語 (Japanese)
+    ドキュメント, ドキュメンテーション, コメント, ドックストリング, JSDoc, README, ガイド, 参照, マニュアル, APIドキュメント
+  ]
   patterns: ["^(document|doc) (?P<target>.+)$", "^(create|generate|write|add) (docs|documentation) (for )?(?P<target>.+)$"]
   contexts: [documentation, comments, api_docs, guides]
 

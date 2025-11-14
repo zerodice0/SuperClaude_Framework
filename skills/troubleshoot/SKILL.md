@@ -9,7 +9,14 @@ complexity: basic
 # Intent Detection
 intents:
   primary: ["troubleshoot {issue}", "fix {problem}", "debug {error}", "resolve {bug}", "diagnose {issue}"]
-  keywords: [troubleshoot, fix, debug, resolve, diagnose, error, bug, issue, problem, failure]
+  keywords: [
+    # English
+    troubleshoot, fix, debug, resolve, diagnose, error, bug, issue, problem, failure,
+    # 한국어 (Korean)
+    문제해결, 수정, 디버그, 해결, 진단, 오류, 버그, 문제, 실패,
+    # 日本語 (Japanese)
+    トラブルシュート, 修正, デバッグ, 解決, 診断, エラー, バグ, 問題, 失敗
+  ]
   patterns: ["^(troubleshoot|fix|debug|resolve|diagnose) (?P<issue>.+)$", "^(?P<issue>.+) (not working|broken|failing|error)$", "^why (is|does) (?P<issue>.+)$"]
   contexts: [debugging, error_resolution, bug_fixing, issue_diagnosis]
 

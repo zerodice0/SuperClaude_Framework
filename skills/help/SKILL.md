@@ -9,7 +9,14 @@ complexity: basic
 # Intent Detection
 intents:
   primary: ["help", "show commands", "list commands", "what commands", "available commands"]
-  keywords: [help, commands, list, show, available, reference, documentation, guide, manual]
+  keywords: [
+    # English
+    help, commands, list, show, available, reference, documentation, guide, manual,
+    # 한국어 (Korean)
+    도움말, 명령어, 목록, 표시, 사용가능, 참조, 문서, 가이드, 매뉴얼,
+    # 日本語 (Japanese)
+    ヘルプ, コマンド, リスト, 表示, 利用可能, 参照, ドキュメント, ガイド, マニュアル
+  ]
   patterns: ["^(help|commands|list|show)(?: (commands|available|all))?$", "^what (can you do|commands are available)$"]
   contexts: [help, reference, documentation, discovery]
 

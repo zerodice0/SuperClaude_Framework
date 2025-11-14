@@ -9,7 +9,14 @@ complexity: standard
 # Intent Detection
 intents:
   primary: ["implement {feature}", "create {component}", "build {functionality}", "develop {feature}", "add {feature}"]
-  keywords: [implement, create, build, develop, add, code, feature, component, api, service]
+  keywords: [
+    # English
+    implement, create, build, develop, add, code, feature, component, api, service,
+    # 한국어 (Korean)
+    구현, 생성, 빌드, 개발, 추가, 코드, 기능, 컴포넌트, API, 서비스,
+    # 日本語 (Japanese)
+    実装, 作成, ビルド, 開発, 追加, コード, 機能, コンポーネント, API, サービス
+  ]
   patterns: ["^(implement|create|build|develop) (a |an )?(?P<feature>.+)$", "^add (?P<feature>.+) (feature|functionality|component)$", "^(?P<feature>.+) (implementation|development)$"]
   contexts: [feature_development, component_creation, api_implementation, code_generation]
 

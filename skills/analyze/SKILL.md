@@ -9,7 +9,14 @@ complexity: basic
 # Intent Detection
 intents:
   primary: ["analyze {target}", "assess {code}", "review {codebase}", "audit {system}"]
-  keywords: [analyze, assess, review, audit, quality, security, performance, architecture]
+  keywords: [
+    # English
+    analyze, assess, review, audit, quality, security, performance, architecture,
+    # 한국어 (Korean)
+    분석, 평가, 검토, 감사, 품질, 보안, 성능, 아키텍처,
+    # 日本語 (Japanese)
+    分析, 評価, レビュー, 監査, 品質, セキュリティ, パフォーマンス, アーキテクチャ
+  ]
   patterns: ["^(analyze|assess|review|audit) (?P<target>.+)?$", "^code (analysis|assessment|review)( of)?( (?P<target>.+))?$"]
   contexts: [code_analysis, quality_assessment, security_audit, performance_review]
 

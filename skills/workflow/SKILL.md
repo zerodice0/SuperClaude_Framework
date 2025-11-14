@@ -9,7 +9,14 @@ complexity: advanced
 # Intent Detection
 intents:
   primary: ["workflow {target}", "generate workflow {feature}", "create implementation plan {prd}", "plan {feature} workflow"]
-  keywords: [workflow, generate, plan, implementation, prd, feature, specification, orchestration, systematic]
+  keywords: [
+    # English
+    workflow, generate, plan, implementation, prd, feature, specification, orchestration, systematic,
+    # 한국어 (Korean)
+    워크플로우, 생성, 계획, 구현, PRD, 기능, 명세, 오케스트레이션, 체계적,
+    # 日本語 (Japanese)
+    ワークフロー, 生成, 計画, 実装, PRD, 機能, 仕様, オーケストレーション, 体系的
+  ]
   patterns: ["^(workflow|generate workflow|plan) (?P<target>.+)$", "^create (implementation|execution) (plan|workflow) (for |from )?(?P<target>.+)$", "^(?P<target>.+\\.md) (workflow|implementation)$"]
   contexts: [prd_analysis, workflow_generation, implementation_planning, multi_domain_coordination]
 

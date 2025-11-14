@@ -12,6 +12,7 @@ from typing import Dict, List, Optional
 
 import yaml
 
+from .tokenizer import smart_tokenize
 from .models import (
     ArgumentSchema,
     AutoTriggerConfig,
@@ -207,9 +208,10 @@ class SkillMatcher:
         )
 
     def _match_keywords(self, query_lower: str) -> List[SkillMatch]:
-        """Match skills by keywords."""
+        """Match skills by keywords with multilingual tokenization."""
         matches: Dict[str, SkillMatch] = {}
-        query_words = set(query_lower.split())
+        # Use smart tokenization for CJK language support
+        query_words = set(smart_tokenize(query_lower))
 
         for word in query_words:
             if word in self._keyword_index:
